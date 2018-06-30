@@ -13,7 +13,8 @@ double openglY;
 
 Player player(0, 0);
 
-/* GLUT callback Handlers */
+std::vector<Rectangl> walls;
+
 void resize(int width, int height)
 {
 	const float ar = (float)width / (float)height;
@@ -42,6 +43,8 @@ void display()
 	glPushMatrix();
 	{
 		player.Draw();
+		for (auto &it : walls)
+			it.draw();
 	}
 	glPopMatrix();
 
@@ -69,31 +72,13 @@ void InitGLUTScene(const char* window_name)
 
 void FunkcjaDoObslugiKlawiatury(unsigned char key, int mouse_x, int mouse_y)
 {
-	//std::cout << "Nacisnieto klawisz: " << key << ", a myszka znajduje sie w pozycji: " << mouse_x << ", " << mouse_y << "(w pikselach)" << std::endl;
-	//if (key == 'w')
-	//{
-	//	//rectangles[0].move(0, 0.1);
-	//	circles[0].move(0, 0.1);
-	//}
-	//if (key == 's')
-	//{
-	//	//rectangles[0].move(0, -0.1);
-	//	circles[0].move(0, -0.1);
-	//}
-	//if (key == 'a')
-	//{
-	//	//rectangles[0].move(-0.1, 0);
-	//	circles[0].move(-0.1, 0);
-	//}
-	//if (key == 'd')
-	//{
-	//	//rectangles[0].move(0.1, 0);
-	//	circles[0].move(0.1, 0);
-	//}
-	//circles[0].move(mouse_x,mouse_y);
-	if (key == 'p')
+	if (key == 's')
 	{
-		player.changeColour();
+		player.move(0, -0.15);
+	}
+	if (key == 'w')
+	{
+		player.move(0, 0.15);
 	}
 	if (key == 'a')
 	{
@@ -131,7 +116,15 @@ int main(int argc, char *argv[])
 {
 	srand(time(NULL));
 	
-
+	Rectangl wall_1(0.4, 5, -3.2, 0, 0, 1, 0, 0);
+	walls.push_back(wall_1);
+	Rectangl wall_2(0.4, 5, 3.2, 0, 0, 1, 0, 0);
+	walls.push_back(wall_2);
+	Rectangl wall_3(6, 0.4, 0, 2.4, 0, 1, 0, 0);
+	walls.push_back(wall_3);
+	Rectangl wall_4(6, 0.4, 0, -2.4, 0, 1, 0, 0);
+	walls.push_back(wall_4);
+	
 	glutInit(&argc, argv);
 	InitGLUTScene("freeglut template");
 	SetCallbackFunctions();
