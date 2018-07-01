@@ -7,11 +7,13 @@
 #include "Circle_1.h"
 #include "Rectangl_1.h"
 #include "Player.h"
+#include "Monster.h"
 
 double openglX;
 double openglY;
 
 Player player(0, 0);
+Monster Bobby(1);
 
 std::vector<Rectangl> walls;
 
@@ -49,6 +51,7 @@ void display()
 	glPushMatrix();
 	{
 		player.Draw();
+		Bobby.Draw();
 		for (auto &it : walls)
 			it.draw();
 	}

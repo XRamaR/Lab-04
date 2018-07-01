@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Circle_1.h" />
     <ClInclude Include="Figure_1.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Rectangl_1.h" />
   </ItemGroup>
