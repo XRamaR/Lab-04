@@ -129,7 +129,7 @@ void SetCallbackFunctions()
 	glutIdleFunc(idle);
 	glutKeyboardFunc(FunkcjaDoObslugiKlawiatury);
 	glutMouseFunc(OnMouseClick);
-	glutTimerFunc(1500, doSth, NULL);
+	glutTimerFunc(1000, doSth, NULL);
 }
 
 int main(int argc, char *argv[])

@@ -15,16 +15,24 @@ public:
 		Circle m(x, y, 0.5, r, g, b);
 		body = m;
 	}
+	void move(double dx, double dy)
+	{
+		x += dx;
+		y += dy;
+		Circle m(x, y, 0.5, r, g, b);
+		body = m;
+		Draw();
+	}
 	void track(double p_x, double p_y)
 	{
-		if (this->x > p_x)
-			move(p_x - this->x, 0);
-		if (this->x < p_x)
-			move(this->x - p_x, 0);
-		if (this->y > p_y)
-			move(0, this->y - p_y);
-		if (this->y < p_y)
-			move(0, p_y - this->y);
+		if (x > p_x)
+			this->move(-0.1, 0);
+		if (x < p_x)
+			this->move(0.1, 0);
+		if (y > p_y)
+			this->move(0,-0.1);
+		if (y < p_y)
+			this->move(0, 0.1);
 	}
 	void Draw()
 	{
