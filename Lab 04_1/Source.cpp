@@ -15,6 +15,12 @@ Player player(0, 0);
 
 std::vector<Rectangl> walls;
 
+Rectangl wall_1(0.4, 5, -3.2, 0, 0, 1, 0, 0);
+Rectangl wall_2(0.4, 5, 3.2, 0, 0, 1, 0, 0);
+Rectangl wall_3(6, 0.4, 0, 2.4, 0, 1, 0, 0);
+Rectangl wall_4(6, 0.4, 0, -2.4, 0, 1, 0, 0);
+
+
 void resize(int width, int height)
 {
 	const float ar = (float)width / (float)height;
@@ -72,21 +78,24 @@ void InitGLUTScene(const char* window_name)
 
 void FunkcjaDoObslugiKlawiatury(unsigned char key, int mouse_x, int mouse_y)
 {
-	if (key == 's')
+	
+	if (key == 's' && abs(player.hitbox.y-wall_4.y)>0.6)
 	{
-		player.move(0, -0.15);
+		player.move(0, -0.1);
+		std::cout << abs(player.hitbox.y - wall_4.y) << std::endl;
+		std::cout << std::endl;
 	}
-	if (key == 'w')
+	if (key == 'w' &&  abs(player.hitbox.y - wall_3.y)>0.6)
 	{
-		player.move(0, 0.15);
+		player.move(0, 0.1);
 	}
-	if (key == 'a')
+	if (key == 'a' && abs(player.hitbox.x - wall_1.x)>0.5)
 	{
-		player.move(-0.15, 0);
+		player.move(-0.1, 0);
 	}
-	if (key == 'd')
+	if (key == 'd' && abs(player.hitbox.x - wall_2.x)>0.5)
 	{
-		player.move(0.15, 0);
+		player.move(0.1, 0);
 	}
 }
 void OnMouseClick(int button, int state, int x, int y)
@@ -96,10 +105,8 @@ void OnMouseClick(int button, int state, int x, int y)
 	float openglY = -((double)y - 300) / 600 * 5.0;
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
-		system("cls");
 		float wspolrzednaX = openglX;
 		float wspolrzednaY = openglY;
-
 	}
 }
 
@@ -116,13 +123,9 @@ int main(int argc, char *argv[])
 {
 	srand(time(NULL));
 	
-	Rectangl wall_1(0.4, 5, -3.2, 0, 0, 1, 0, 0);
 	walls.push_back(wall_1);
-	Rectangl wall_2(0.4, 5, 3.2, 0, 0, 1, 0, 0);
 	walls.push_back(wall_2);
-	Rectangl wall_3(6, 0.4, 0, 2.4, 0, 1, 0, 0);
 	walls.push_back(wall_3);
-	Rectangl wall_4(6, 0.4, 0, -2.4, 0, 1, 0, 0);
 	walls.push_back(wall_4);
 	
 	glutInit(&argc, argv);
