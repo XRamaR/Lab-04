@@ -15,7 +15,7 @@ public:
 		Circle m(x, y, 0.5, r, g, b);
 		body = m;
 	}
-	void Track(double p_x, double p_y)
+	void track(double p_x, double p_y)
 	{
 		if (this->x > p_x)
 			move(p_x - this->x, 0);

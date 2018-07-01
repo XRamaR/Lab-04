@@ -26,8 +26,6 @@ public:
 	}
 	void draw()
 	{
-		int triangleAmount = 30; //# of triangles used to draw circle
-								 //GLfloat radius = 0.8f; //radius
 		GLfloat twicePi = 2.0f * M_PI;
 
 		glPushMatrix();

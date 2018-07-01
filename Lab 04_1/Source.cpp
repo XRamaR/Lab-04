@@ -9,6 +9,8 @@
 #include "Player.h"
 #include "Monster.h"
 
+#define KEY_ESCAPE 27
+
 double openglX;
 double openglY;
 
@@ -50,8 +52,8 @@ void display()
 
 	glPushMatrix();
 	{
-		player.Draw();
 		Bobby.Draw();
+		player.Draw();
 		for (auto &it : walls)
 			it.draw();
 	}
@@ -85,8 +87,6 @@ void FunkcjaDoObslugiKlawiatury(unsigned char key, int mouse_x, int mouse_y)
 	if (key == 's' && abs(player.hitbox.y-wall_4.y)>0.6)
 	{
 		player.move(0, -0.1);
-		std::cout << abs(player.hitbox.y - wall_4.y) << std::endl;
-		std::cout << std::endl;
 	}
 	if (key == 'w' &&  abs(player.hitbox.y - wall_3.y)>0.6)
 	{
@@ -99,6 +99,10 @@ void FunkcjaDoObslugiKlawiatury(unsigned char key, int mouse_x, int mouse_y)
 	if (key == 'd' && abs(player.hitbox.x - wall_2.x)>0.5)
 	{
 		player.move(0.1, 0);
+	}
+	if (key == KEY_ESCAPE)
+	{
+		exit(0);
 	}
 }
 void OnMouseClick(int button, int state, int x, int y)
@@ -113,6 +117,11 @@ void OnMouseClick(int button, int state, int x, int y)
 	}
 }
 
+void doSth(int nothing) {
+	Bobby.track(player.x, player.y);
+	glutTimerFunc(500, doSth, NULL);
+}
+
 void SetCallbackFunctions()
 {
 	glutReshapeFunc(resize);
@@ -120,6 +129,7 @@ void SetCallbackFunctions()
 	glutIdleFunc(idle);
 	glutKeyboardFunc(FunkcjaDoObslugiKlawiatury);
 	glutMouseFunc(OnMouseClick);
+	glutTimerFunc(1500, doSth, NULL);
 }
 
 int main(int argc, char *argv[])
